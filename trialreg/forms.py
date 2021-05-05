@@ -34,7 +34,7 @@ class Register(forms.Form):
         #get all events
         target = "https://makerkids.pike13.com/api/v2/desk/event_occurrences"
         headers = {'Authorization':'Bearer ' + token}
-        payload = {'client_id':client_id, "from":datetime.datetime.now(), "to":datetime.datetime.now()+datetime.timedelta(days=4)} #days>45 breaks pike api
+        payload = {'client_id':client_id, "from":datetime.datetime.now(), "to":datetime.datetime.now()+datetime.timedelta(days=44)} #days>45 breaks pike api
         r=requests.get(target, headers=headers, params=payload)
         json_data=json.loads(r.text)
 
