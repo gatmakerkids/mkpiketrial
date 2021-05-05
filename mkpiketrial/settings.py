@@ -132,13 +132,13 @@ STATIC_URL = '/static/'
 django_on_heroku.settings(locals()) #added for heroku
 
 #####email#####
-EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend' #email to console
+#EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend' #email to console
 
 #google smtp
-#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-#EMAIL_HOST = 'smtp.gmail.com'
-#EMAIL_USE_TLS = True
-#EMAIL_PORT = 587
-#EMAIL_HOST_USER = 'djangomakerkids@gmail.com'
-#EMAIL_HOST_PASSWORD = 'djangoadmin'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER_ENVAR')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD_ENVAR')
 #mailgun, sender, other sender
