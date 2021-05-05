@@ -1,0 +1,16 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MakerKids Trial</title>
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+  <link rel="shortcut icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+  {% block extra_head %}
+  {% endblock %}
+  <body>
+    {% block content %}
+      <p>Placeholder text in base template. Replace with page content.</p>
+    {% endblock content %}
+  </body>
+</html>

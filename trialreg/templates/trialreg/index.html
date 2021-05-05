@@ -1,0 +1,22 @@
+{% extends 'trialreg/base.html' %}
+{% load static %}
+
+{% block content %}
+<div id="header">
+  <img src="{% static 'images/mk_logo_new.png' %}" width='25%'>
+</div>
+<hr>
+  <div>
+    <div id="form-container">
+      <h1>Join a Free Virtual Trial!</h1>
+      {% if error %}
+        <p style="color:red">{{ error }}</p>
+      {% endif %}
+      <form action="" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Submit">
+      </form>
+    </div>
+  </div>
+{% endblock content %}

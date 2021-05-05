@@ -1,0 +1,81 @@
+@font-face{
+  font-family:'VarelaRound-Regular';
+  src: local(VarelaRound-Regular),
+    url('../fonts/VarelaRound-Regular.ttf') format('truetype');
+}
+
+body {
+  font-family: VarelaRound-Regular;
+  background-color: none;
+  text-align: center;
+}
+
+#form-container {
+  display: block;
+  width:400px;
+  margin:auto;
+  padding: 10px;
+  background-color: white;
+
+  border-style: solid;
+  border-color: black;
+  border-width: 1px;
+  border-radius: 15px;
+
+  box-shadow: 5px 10px;
+}
+
+#form-container p{
+  text-align:left;
+}
+
+#form-container ul{
+  text-align:left;
+}
+
+form label {
+  display: block;
+  text-align: left;
+  padding-top: 15px;
+}
+
+form input {
+  font-family: VarelaRound-Regular;
+  display: block;
+  text-align: left;
+  border-radius: 10px;
+}
+
+form select {
+  display: block;
+  text-align: left;
+  font-size:12px;
+}
+
+.captcha {
+  display: block;
+  text-align: left;
+}
+
+form input[type=submit] {
+  font-family: VarelaRound-Regular;
+  display: block;
+  width:50%;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top:15px;
+
+  text-align: center;
+
+  background-color: white;
+  height: 100px;
+}
+
+.errorlist li {
+  text-align: left;
+  color:red;
+}
+
+#header {
+  text-align: left;
+}

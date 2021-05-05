@@ -1,0 +1,50 @@
+
+{% extends 'trialreg/base.html' %}
+{% load static %}
+
+{% block content %}
+  <div>
+    <div id="form-container">
+      <img src="{% static 'images/mk_logo_new.png' %}" width='75%'>
+      <h1>Success!</h1>
+      <h3>You've been registered in <u>{{ event }}</u><br>{{ date }} at {{ time }}</h3>
+
+      <p style='background-color:pink; padding:5px;'>
+        <i>
+          If you can not make it to this class or need to reschedule to a different timeslot,
+          please let us know at <a href="mailto:info@makerkids.com">info@makerkids.com</a>
+          as soon as possible.
+        </i>
+      </p>
+
+      <p>
+        <u><b>Next Steps</b></u><br>
+        An account has been made for you in MakerKids' registration system.
+        Feel free to confirm your email address via any emails you get.
+      <p>
+        You will recieve more instructions about your class by email automatically.
+        If you have any questions please do contact us at <a href="mailto:info@makerkids.com">info@makerkids.com</a>.
+      </p>
+
+      <p>
+        <u><b>Special Accomodations</b></u><br>
+        Any participants who would benefit from special accomodations should definitely
+        contact us at <a href="mailto:info@makerkids.com">info@makerkids.com</a> so we can work together to ensure
+        everyone's needs are met.
+      </p>
+      <p>
+        This includes (but is not limited to) issues such as...
+        <ul>
+          <li>Friends or siblings being put together.</li>
+          <li>Allergies or other physical medical issues.</li>
+          <ul>
+            <li><i>all MakerKids mentors are certified<br>in Standard First Aid and CPR-C</i></li>
+          </ul>
+          <li>Aytpical neurology (ASD, ADD, LD, etc).</li>
+          <li>Behavioural concerns or recommendations.</li>
+          <li>Anything else that we should know to make sure everyone has a great time!</li>
+        </ul>
+      </p>
+    </div>
+  </div>
+{% endblock content %}
