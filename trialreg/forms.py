@@ -56,10 +56,26 @@ class Register(forms.Form):
             local_start = start.replace(tzinfo=pytz.utc).astimezone(local_tz)
             local_end = end.replace(tzinfo=pytz.utc).astimezone(local_tz)
 
-            name_grade = event_occurrence['name'].split(' - ')[0]
-            name_level = event_occurrence['name'].split(' (')[1]
-            name_level = '(' + name_level
-            temp_tup = (event_occurrence['id'], local_start.strftime("%a %b. %d") + " " + local_start.strftime("%I:%M%p") + "-" + local_end.strftime("%I:%M%p") + " EST |"  + name_grade + name_level)
+            #name_grade = event_occurrence['name'].split(' - ')[0]
+            #name_level = event_occurrence['name'].split(' (')[1].rstrip('(Eastern Standard Time)')
+            #grade_and_level = name_grade + name_level
+            #grade_and_level = grade_and_level.rstrip('(Eastern Standard Time)')
+
+            title = event_occurrence['name']
+            title = title.split(' (Eastern Standard Time)')[0]
+            title = title.split(' - Robotics, Coding, Minecraft')[0]
+            title = title.split(' Mini Maker Trial')[0]
+            try:
+                title = title.split(' Virtual Trial:')[0] + title.split(' Virtual Trial:')[1]
+            except:
+                pass
+            title = title.split(' Trial')[0]
+
+
+
+            #title = title.rstrip(' - Robotics, Coding, Minecraft')
+
+            temp_tup = (event_occurrence['id'], local_start.strftime("%a %b. %d") + ", " + local_start.strftime("%I:%M%p") + "-" + local_end.strftime("%I:%M%p") + " EST/EDT | "  + title)
             trial_classes.append(temp_tup)
 
         #return the list of tuples
