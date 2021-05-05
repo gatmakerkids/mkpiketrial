@@ -14,6 +14,12 @@ import requests
 import json
 import pytz
 
+import os
+
+PIKE_SITE = os.environ.get('PIKE_SITE_ENVAR')
+PIKE_CLIENT_ID = os.environ.get('PIKE_CLIENT_ID_ENVAR')
+PIKE_TOKEN = os.environ.get('PIKE_TOKEN_ENVAR')
+
 class Register(forms.Form):
     parent_first_name = forms.CharField(max_length=50)
     parent_last_name = forms.CharField(max_length=50)
@@ -28,21 +34,19 @@ class Register(forms.Form):
     )
 
     def get_trials():
-        client_id = "FKIsXUGoiUINEvtjL15CL0HUvsxEhJk2I9rdf9li"
-        token = "7S61Wa5ioNgBQ70fpqBkPMJeNWpxRW7Rt8FEOuZj"
-
         #get all events
-        target = "https://makerkids.pike13.com/api/v2/desk/event_occurrences"
-        headers = {'Authorization':'Bearer ' + token}
-        payload = {'client_id':client_id, "from":datetime.datetime.now(), "to":datetime.datetime.now()+datetime.timedelta(days=44)} #days>45 breaks pike api
+        target = PIKE_SITE + 'api/v2/desk/event_occurrences'
+        headers = {'Authorization':'Bearer ' + PIKE_TOKEN}
+        payload = {'client_id':PIKE_CLIENT_ID, "from":datetime.datetime.now(), "to":datetime.datetime.now()+datetime.timedelta(days=44)} #days>45 breaks pike api
         r=requests.get(target, headers=headers, params=payload)
         json_data=json.loads(r.text)
 
         #find trials with capacity
         open_trials = []
-        for event_occurrence in json_data['event_occurrences']:
-            if('Trial' or 'trial') in event_occurrence['name'] and event_occurrence['capacity_remaining']>0:
-                open_trials.append(event_occurrence)
+        if 'event_occurrences' in json_data:
+            for event_occurrence in json_data['event_occurrences']:
+                if('Trial' or 'trial') in event_occurrence['name'] and event_occurrence['capacity_remaining']>0:
+                    open_trials.append(event_occurrence)
 
         #sort by datetime
         open_trials.sort(key=lambda x: x['start_at'])

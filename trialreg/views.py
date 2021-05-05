@@ -12,6 +12,12 @@ from django.template import loader
 import requests
 import json
 
+import os
+
+PIKE_SITE = os.environ.get('PIKE_SITE_ENVAR')
+PIKE_CLIENT_ID = os.environ.get('PIKE_CLIENT_ID_ENVAR')
+PIKE_TOKEN = os.environ.get('PIKE_TOKEN_ENVAR')
+
 # Create your views here.
 def index(request):
     template = loader.get_template('trialreg/index.html')
@@ -45,13 +51,11 @@ def index(request):
 
     #double check event_occurrence, is a trial, is in future, isn't too far away, and isn't full
     #pike creds
-    client_id = "pN6GwoWsIj5oUUK4FH4Kg4qNQwA0F6gj6pjma71K"
-    token = "dyQdbMGPh2JqMdQ4sKuo3B1Eo1u1eZdz9CfjSNZp"
-    headers = {'Authorization':'Bearer ' + token}
-    payload = {'client_id':client_id}
+    headers = {'Authorization':'Bearer ' + PIKE_TOKEN}
+    payload = {'client_id':PIKE_CLIENT_ID}
 
     #pike event call
-    target = "https://makerkids.pike13.com/api/v2/desk/event_occurrences/" + str(event_occurrence_id)
+    target = PIKE_SITE + 'api/v2/desk/event_occurrences/' + str(event_occurrence_id)
     r=requests.get(target, headers=headers, params=payload)
     json_data=json.loads(r.text)
     import pdb; pdb.set_trace()
@@ -83,7 +87,7 @@ def index(request):
         return HttpResponse(template.render(context, request))
 
     #check if parent exists in pike (by email)
-    target = "https://makerkids.pike13.com/api/v2/desk/people/search?q=" + str(email)
+    target = PIKE_SITE + 'api/v2/desk/people/search?q=' + str(email)
     payload = {'fields':'email'}
     r=requests.get(target, headers=headers, params=payload)
     json_data=json.loads(r.text)
@@ -91,7 +95,7 @@ def index(request):
         manager_id = json_data['results'][0]['id']
     #if not create parent and get id
     else:
-        target = "https://makerkids.pike13.com/api/v2/desk/people"
+        target = PIKE_SITE + 'api/v2/desk/people'
         payload = {
             'first_name':parent_first_name,
             'last_name':parent_last_name,
@@ -103,7 +107,7 @@ def index(request):
         manager_id = json_data['people'][0]['id']
 
     #check if kid exists in pike as dependent of parent
-    target = "https://makerkids.pike13.com/api/v2/desk/people/" + str(manager_id)
+    target = PIKE_SITE + 'api/v2/desk/people/' + str(manager_id)
     payload = {
         'include_relationships':True,
     }
@@ -118,7 +122,7 @@ def index(request):
                 dependent_id = dependent['id']
     #create and them associate dependent if they don't exist
     if dependent_id == '':
-        target = "https://makerkids.pike13.com/api/v2/desk/people"
+        target = PIKE_STIE + 'api/v2/desk/people'
         payload = {
             'first_name':child_first_name,
             'last_name':child_last_name,
@@ -130,14 +134,14 @@ def index(request):
         dependent_id = json_data['people'][0]['id']
         dependent_ids.append(dependent_id)
 
-        target = "https://makerkids.pike13.com/api/v2/desk/people" + str(manager_id)
+        target = PIKE_SITE + 'api/v2/desk/people' + str(manager_id)
         payload = {
             'dependents':dependent_ids,
         }
         r.requests.put(target, headers=headers, params=payload)
 
     #enroll dependent in event_occurence
-    target = "https://makerkids.pike13.com/api/v2/desk/visits"
+    target = PIKE_SITE + 'api/v2/desk/visits'
     payload = {
         'visit':{
             'person_id':dependent_id,
@@ -165,13 +169,11 @@ def index(request):
 
 def success(request, event_occurrence_id):
     template = loader.get_template('trialreg/success.html')
-    client_id = "pN6GwoWsIj5oUUK4FH4Kg4qNQwA0F6gj6pjma71K"
-    token = "dyQdbMGPh2JqMdQ4sKuo3B1Eo1u1eZdz9CfjSNZp"
 
     #get the event_occurrence
-    target = "https://makerkids.pike13.com/api/v2/desk/event_occurrences/" + str(event_occurrence_id)
-    headers = {'Authorization':'Bearer ' + token}
-    payload = {'client_id':client_id}
+    target = PIKE_SITE + 'api/v2/desk/event_occurrences/' + str(event_occurrence_id)
+    headers = {'Authorization':'Bearer ' + PIKE_TOKEN}
+    payload = {'client_id':PIKE_CLIENT_ID}
     r=requests.get(target, headers=headers, params=payload)
     json_data=json.loads(r.text)
     event_occurrence=json_data['event_occurrences'][0]

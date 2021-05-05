@@ -21,10 +21,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'zn!1=7)47m=nk&hf^+wq6glxg!*3o(*&gfc!_e#9%s_-pd$07*'
+SECRET_KEY = os.environ.get('SECRET_KEY_ENVAR')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG_ENVAR')
 
 ALLOWED_HOSTS = ['127.0.0.1']
 
@@ -82,9 +82,9 @@ WSGI_APPLICATION = 'mkpiketrial.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME':'mktrialdb',
-        'USER':'dbadmin',
-        'PASSWORD':'dbadmin',
+        'NAME':os.environ.get('DB_NAME_ENVAR'),
+        'USER':os.environ.get('DB_USER_ENVAR'),
+        'PASSWORD':os.environ.get('DB_PASSWORD_ENVAR'),
         'HOST':'localhost',
         'PORT':'',
     }
