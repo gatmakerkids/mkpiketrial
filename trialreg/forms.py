@@ -48,18 +48,14 @@ class Register(forms.Form):
         open_trials.sort(key=lambda x: x['start_at'])
 
         #format list of tuple items
-        trial_classes = []
+        trial_classes = ['hi']
+        '''
         for event_occurrence in open_trials:
             start = datetime.datetime.strptime(event_occurrence['start_at'].rstrip('Z'), '%Y-%m-%dT%H:%M:%S')
             end = datetime.datetime.strptime(event_occurrence['end_at'].rstrip('Z'), '%Y-%m-%dT%H:%M:%S')
             local_tz = pytz.timezone('America/Toronto') # use your local timezone name here
             local_start = start.replace(tzinfo=pytz.utc).astimezone(local_tz)
             local_end = end.replace(tzinfo=pytz.utc).astimezone(local_tz)
-
-            #name_grade = event_occurrence['name'].split(' - ')[0]
-            #name_level = event_occurrence['name'].split(' (')[1].rstrip('(Eastern Standard Time)')
-            #grade_and_level = name_grade + name_level
-            #grade_and_level = grade_and_level.rstrip('(Eastern Standard Time)')
 
             title = event_occurrence['name']
             title = title.split(' (Eastern Standard Time)')[0]
@@ -73,6 +69,7 @@ class Register(forms.Form):
 
             temp_tup = (event_occurrence['id'], local_start.strftime("%a %b. %d") + ", " + local_start.strftime("%I:%M%p") + "-" + local_end.strftime("%I:%M%p") + " EST/EDT | "  + title)
             trial_classes.append(temp_tup)
+        '''
 
         #return the list of tuples
         return trial_classes
