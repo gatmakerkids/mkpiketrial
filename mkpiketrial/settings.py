@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import django_on_heroku #added for heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -80,8 +81,12 @@ WSGI_APPLICATION = 'mkpiketrial.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME':'mktrialdb',
+        'USER':'dbadmin',
+        'PASSWORD':'dbadmin',
+        'HOST':'localhost',
+        'PORT':'',
     }
 }
 
@@ -123,3 +128,17 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+django_on_heroku.settings(locals()) #added for heroku
+
+#####email#####
+EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend' #email to console
+
+#google smtp
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+#EMAIL_HOST = 'smtp.gmail.com'
+#EMAIL_USE_TLS = True
+#EMAIL_PORT = 587
+#EMAIL_HOST_USER = 'djangomakerkids@gmail.com'
+#EMAIL_HOST_PASSWORD = 'djangoadmin'
+#mailgun, sender, other sender
