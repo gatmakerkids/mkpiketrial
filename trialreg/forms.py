@@ -34,7 +34,7 @@ class Register(forms.Form):
         #get all events
         target = "https://makerkids.pike13.com/api/v2/desk/event_occurrences"
         headers = {'Authorization':'Bearer ' + token}
-        payload = {'client_id':client_id, "from":datetime.datetime.now(), "to":datetime.datetime.now()+datetime.timedelta(days=44)} #days>45 breaks pike api
+        payload = {'client_id':client_id, "from":datetime.datetime.now(), "to":datetime.datetime.now()+datetime.timedelta(days=4)} #days>45 breaks pike api
         r=requests.get(target, headers=headers, params=payload)
         json_data=json.loads(r.text)
 
@@ -70,10 +70,6 @@ class Register(forms.Form):
             except:
                 pass
             title = title.split(' Trial')[0]
-
-
-
-            #title = title.rstrip(' - Robotics, Coding, Minecraft')
 
             temp_tup = (event_occurrence['id'], local_start.strftime("%a %b. %d") + ", " + local_start.strftime("%I:%M%p") + "-" + local_end.strftime("%I:%M%p") + " EST/EDT | "  + title)
             trial_classes.append(temp_tup)
