@@ -28,7 +28,6 @@ class Register(forms.Form):
     )
 
     def get_trials():
-        '''
         client_id = "FKIsXUGoiUINEvtjL15CL0HUvsxEhJk2I9rdf9li"
         token = "7S61Wa5ioNgBQ70fpqBkPMJeNWpxRW7Rt8FEOuZj"
 
@@ -70,11 +69,9 @@ class Register(forms.Form):
 
             temp_tup = (event_occurrence['id'], local_start.strftime("%a %b. %d") + ", " + local_start.strftime("%I:%M%p") + "-" + local_end.strftime("%I:%M%p") + " EST/EDT | "  + title)
             trial_classes.append(temp_tup)
-        '''
 
         #return the list of tuples
-        #return trial_classes
-        return ['hi']
+        return trial_classes
     time_slot = forms.ChoiceField(choices=get_trials, required=True)
 
     #captcha = CaptchaField()

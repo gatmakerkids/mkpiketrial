@@ -1,1 +1,1 @@
-web: gunicorn mkreg.wsgi --log-file -
+web: gunicorn mkpiketrial.wsgi --log-file -
