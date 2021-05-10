@@ -14,11 +14,11 @@ import json
 
 import os
 
-PIKE_SITE = os.environ.get('PIKE_SITE_ENVAR')
-PIKE_CLIENT_ID = os.environ.get('PIKE_CLIENT_ID_ENVAR')
-PIKE_TOKEN = os.environ.get('PIKE_TOKEN_ENVAR')
+PIKE_SITE = os.environ.get('PIKEV_SITE_ENVAR')
+PIKE_CLIENT_ID = os.environ.get('PIKEV_CLIENT_ID_ENVAR')
+PIKE_TOKEN = os.environ.get('PIKEV_TOKEN_ENVAR')
 
-# Create your views here.
+# Create your views heSre.
 def index(request):
     template = loader.get_template('trialreg/index.html')
     form = Register()

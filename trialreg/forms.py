@@ -16,9 +16,9 @@ import pytz
 
 import os
 
-PIKE_SITE = os.environ.get('PIKE_SITE_ENVAR')
-PIKE_CLIENT_ID = os.environ.get('PIKE_CLIENT_ID_ENVAR')
-PIKE_TOKEN = os.environ.get('PIKE_TOKEN_ENVAR')
+PIKE_SITE = os.environ.get('PIKEV_SITE_ENVAR')
+PIKE_CLIENT_ID = os.environ.get('PIKEV_CLIENT_ID_ENVAR')
+PIKE_TOKEN = os.environ.get('PIKEV_TOKEN_ENVAR')
 
 class Register(forms.Form):
     parent_first_name = forms.CharField(max_length=50)
